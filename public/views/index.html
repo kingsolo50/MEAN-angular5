@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Block L 93 App</title>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>Block L 93 App</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -13,15 +14,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
 
+    <!-- angular -->
+    <script src="./javascripts/angular/angular.min.js"></script>
+    <script src="./javascripts/angular/angular-route.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./app-routes.js"></script>
+    <script src="./javascripts/bapp.js"></script>
+
 </head>
-<body>
+<body ng-app="blocklapp">
     <div class="container">
         <!-- header - nav -->
         <div class="row">
             <div class="col">
                 <!-- navbar -->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand">Block L93</a>
+                    <a class="navbar-brand" href="/">Block L93- Soon come</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -30,8 +38,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" routerLink="/home" routerLinkActive="active">
-                                    <!-- Home -->
+                                <a class="nav-link" href="/">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">
+                                    About
                                 </a>
                             </li>
                         </ul>
@@ -79,10 +92,19 @@
                     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
                     <hr class="my-4">
                     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+                    <p>
+                        {{1+1}}
+                    </p>
                     <p class="lead">
                         <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
                     </p>
                 </div>
+            </div>
+        </div>
+        <!-- views -->
+        <div class="row">
+            <div class="col">
+                <div ng-view></div>
             </div>
         </div>
     </div>

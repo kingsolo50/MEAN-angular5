@@ -23,7 +23,7 @@ app.use('/api-users', users); // Backend connection
 // app.use('/', index);
 
 app.get('*', function (req, res, next) {
-  res.sendFile('public/angular-src/dist/index.html', { root: __dirname });
+  res.sendFile('public/views/index.html', { root: __dirname });
 });
 
 // catch 404 and forward to error handler
