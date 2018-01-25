@@ -3,7 +3,7 @@ const express = require('express'),
     bcrypt = require('bcrypt-nodejs'),
     dbconnection = require('../config/databaseConnection'),
     Schema = mongoose.Schema;
-mongoose.Promise = global.Promise; // Configure Mongoose Promises
+    mongoose.Promise = global.Promise; // Configure Mongoose Promises
 
 /* User Schema Object */
 const userSchema = new mongoose.Schema({

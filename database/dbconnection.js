@@ -15,4 +15,4 @@ mongoose.connection.on('error', (err) => {
 });
 
 /* Mongoose Schema imports */
-const userSchema = require('../model/model_user');
+const userSchema = require('../model/model-user');

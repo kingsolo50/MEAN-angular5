@@ -1,0 +1,54 @@
+// Default style
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  > .col,
+  > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+.registerBackground {
+    background: url('https://images.pexels.com/photos/58639/pexels-photo-58639.jpeg?w=940&h=650&auto=compress&cs=tinysrgb');
+    background-size: cover;
+    height: auto;
+    width: auto;
+}
+
+@mixin mobileView {
+    .hidden {
+        display: none;
+    }
+}
+
+@mixin desktopView {
+
+}
+
+// Extra small devices (portrait phones, less than 576px)
+
+@media (max-width: 575px) {
+    @include mobileView();
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) and (max-width: 767px) {
+    @include mobileView();
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) and (max-width: 991px) {
+    @include desktopView();
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) and (max-width: 1199px) {
+    @include desktopView();
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+    @include desktopView();
+}
