@@ -1,3 +1,23 @@
-<p>
-  login works!
-</p>
+<div class="row">
+  <div class="col-4 hidden"></div>
+  <div class="col">
+    <h1>Log In</h1>
+    <form (submit)="onLoginSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" class="form-control" [(ngModel)]="email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" [(ngModel)]="password">
+      </div>
+      <button class="btn btn-primary" type="submit">Sign In</button>
+    </form>
+    <hr>
+    <p>
+      Don't have an account?
+      <a routerLink="/register" routerLinkActive="active">Register instead!</a>
+    </p>
+  </div>
+  <div class="col-4 hidden"></div>
+</div>

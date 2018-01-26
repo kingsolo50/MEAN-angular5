@@ -1,9 +1,9 @@
-const express = require('express'),
-    mongoose = require('mongoose'),
-    bcrypt = require('bcrypt-nodejs'),
-    dbconnection = require('../config/databaseConnection'),
-    Schema = mongoose.Schema;
-    mongoose.Promise = global.Promise; // Configure Mongoose Promises
+const   express = require('express'),
+        mongoose = require('mongoose'),
+        bcrypt = require('bcrypt-nodejs'),
+        dbconnection = require('../config/databaseConnection'),
+        Schema = mongoose.Schema;
+        mongoose.Promise = global.Promise; // Configure Mongoose Promises
 
 /* User Schema Object */
 const userSchema = new mongoose.Schema({
@@ -45,12 +45,16 @@ userSchema.pre('save', function (next) {
         return next();
 
     // Apply encryption
-    bcrypt.hash('password', null, null, (err, hash) => {
+    bcrypt.hash('password', null, null, function(err, hash) {
         if (err) return next(err);
         userSchema.password = hash;
         next();
     });
 
-})
+});
+// Validating password - creating custom method for the database
+userSchema.methods.comparePassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+}
 
 module.exports = mongoose.model('userModel', userSchema);
