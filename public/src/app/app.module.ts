@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Externals
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' },
   // { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

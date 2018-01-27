@@ -45,44 +45,52 @@ router.post('/register', (req, res, next) => {
 /* User authentication */
 // http://localhost:3000/user-api/authenticate
 router.post('/authenticate', function(req, res, next) {
-  const bodyUsername = (req.body.username).toLowerCase();
-  // Check database for username
-  userModel.findOne({ username: bodyUsername })
-    .select('email username firstname lastname password')
-    .exec(function(err, user) {
-    if (err) throw err;
-    if (!user) {
-      res.status(404).send({msg: 'User does not exist'});
-      res.json({
-        success: false,
-        msg: 'User not found..'
-      });
-    } else if (user) {
-      const validPassword = user.comparePassword(req.body.password);
-      if (!validPassword) {
+  // Check if username and password was provided
+  if (!req.body.username && !req.body.password) {
+    console.log('Enter info');
+    res.json({ success: false, message: 'No infomation was provided' }); // Return error
+    res.redirect('back');
+  } else {
+    // Check if username exists in db
+    const bodyUsername = (req.body.username).toLowerCase();
+    userModel.findOne({ username: bodyUsername }) // Check database for username
+      .select('email username firstname lastname password')
+      .exec(function(err, user) {
+      if (err) throw err;
+      if (!user) {
+        res.send('no fat ass');
+        res.status(404).send({msg: 'User does not exist'});
         res.json({
           success: false,
-          msg: 'Could not authenticate password'
+          msg: 'User not found..'
         });
-      } else {
-        res.json({
-          success: true,
-          msg: 'User authenicated great..',
-          user: {
-            id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
-            username: user.username,
-            email: user.email
-          }
-        });
+      } else if (user) {
+        const validPassword = user.comparePassword(req.body.password);
+        if (!validPassword) {
+          res.json({
+            success: false,
+            msg: 'Could not authenticate password'
+          });
+        } else {
+          res.json({
+            success: true,
+            msg: 'User authenicated great..',
+            user: {
+              id: user._id,
+              firstname: user.firstname,
+              lastname: user.lastname,
+              username: user.username,
+              email: user.email
+            }
+          });
+        }
       }
-    }
-
-  });
-
-  // Wait to install passport and tings
   
+    });
+  }
+
 });
 
 module.exports = router; 
+// Github reference && guide
+// https://github.com/kingsolo50/MEAN-Stack-With-Angular-2-Tutorial/blob/master/routes/authentication.js 

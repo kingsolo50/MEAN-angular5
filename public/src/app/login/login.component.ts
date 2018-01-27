@@ -37,17 +37,17 @@ export class LoginComponent implements OnInit {
     // Login Authenticate
     this.userService.authenticateUser(user).subscribe(
       data => {
-        console.log(data);
-        console.log(data.success);
-        console.log('Hi ' + data.user.firstname);
-        // if (data.success = true) {
-        //   this.userService.storeUserData(data.token, data.user);
-        //   this.flashMessage.show('Welcome ' + data.user.firstName, { cssClass: 'alert-primary', timeout: 5000 });
-        //   this.router.navigate(['/dashboard']); // Send to login in page
-        // } else {
-        //   this.flashMessage.show('Error please try again', { cssClass: 'alert-danger', timeout: 5000 });
-        //   this.router.navigate(['/login']); // Send back to register page
-        // }
+        // console.log(data); // Used to check data
+        // console.log(data.success); // Used to check data
+        // console.log('Hi ' + data.user.firstname); // Used to check data
+        if (data.success = true) {
+          // this.userService.storeUserData(data.token, data.user);
+          this.flashMessage.show('Welcome ' + data.user.firstname, { cssClass: 'alert-primary', timeout: 5000 });
+          this.router.navigate(['/dashboard']); // Send to login in page
+        } else {
+          this.flashMessage.show('Error please try again', { cssClass: 'alert-danger', timeout: 5000 });
+          this.router.navigate(['/login']); // Send back to register page
+        }
       }
     );
 
