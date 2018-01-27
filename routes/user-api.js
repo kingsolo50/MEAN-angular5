@@ -12,11 +12,11 @@ router.get('/', function (req, res, next) {
 router.post('/register', (req, res, next) => {
   console.log('New user data sent to mongo...');
   let newUser = new userModel(); /* Creating user */
-  newUser.username = req.body.username;
-  newUser.firstname = req.body.firstname;
-  newUser.lastname = req.body.lastname;
-  newUser.password = req.body.password;
-  newUser.email = req.body.email;
+    newUser.username = req.body.username.toLowerCase();
+    newUser.firstname = req.body.firstname;
+    newUser.lastname = req.body.lastname;
+    newUser.password = req.body.password;
+    newUser.email = req.body.email.toLowerCase();
   if (req.body.username === null ||
       req.body.username == '' ||
       req.body.firstname === null ||
@@ -45,11 +45,8 @@ router.post('/register', (req, res, next) => {
 /* User authentication */
 // http://localhost:3000/user-api/authenticate
 router.post('/authenticate', function(req, res, next) {
-  //res.send('Testing auth route');
-  // const email = req.body.email;
-  //const password = req.body.password;
   const bodyUsername = (req.body.username).toLowerCase();
-  // // Check db
+  // Check database for username
   userModel.findOne({ username: bodyUsername })
     .select('email username password')
     .exec(function(err, user) {
