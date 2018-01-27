@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
 import { ValidateService } from '../service/validate.service';
 import { UserService } from '../service/user.service';
+import '../service/userInterface'; // Interface data
 import * as $ from 'jquery';
 
 @Component({
@@ -13,7 +15,7 @@ import * as $ from 'jquery';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: String;
+  username: String;
   password: String;
 
   constructor(
@@ -28,17 +30,26 @@ export class LoginComponent implements OnInit {
 
   onLoginSubmit() {
     const user = {
-      email: this.email,
+      username: this.username,
       password: this.password
     };
 
     // Login Authenticate
     this.userService.authenticateUser(user).subscribe(
       data => {
-        // console.log('Hi user email' + data.user.firstname);
         console.log(data);
+        console.log(data.success);
+        console.log('Hi ' + data.user.firstname);
+        // if (data.success = true) {
+        //   this.userService.storeUserData(data.token, data.user);
+        //   this.flashMessage.show('Welcome ' + data.user.firstName, { cssClass: 'alert-primary', timeout: 5000 });
+        //   this.router.navigate(['/dashboard']); // Send to login in page
+        // } else {
+        //   this.flashMessage.show('Error please try again', { cssClass: 'alert-danger', timeout: 5000 });
+        //   this.router.navigate(['/login']); // Send back to register page
+        // }
       }
     );
-  }
 
+  }
 }

@@ -6,9 +6,13 @@ import './userInterface'; // Interface data
 const userApi = 'http://localhost:3000/user-api/register';
 const userAuthenticate = 'http://localhost:3000/user-api/authenticate';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class UserService {
-  user;
+  user: any;
 
   constructor(private http: HttpClient) { }
   // Register user api call
@@ -27,11 +31,6 @@ export class UserService {
   authenticateUser(user) {
     console.log('Authenticate user details sent to EN');
     const body = JSON.stringify(user);
-    return this.http.post(userAuthenticate, user,
-      // Options
-      {
-        headers: new HttpHeaders().set('Content-Type', 'application/json'),
-        responseType: 'text'
-      });
+    return this.http.post<UserInterface>(userAuthenticate, user, httpOptions);
   }
 }

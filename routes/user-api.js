@@ -38,7 +38,7 @@ router.post('/register', (req, res, next) => {
         res.send('User created.. Good job..Msg from ME');
       }
     });
-  }
+  } 
   console.log(newUser);
 });
 
@@ -48,7 +48,7 @@ router.post('/authenticate', function(req, res, next) {
   const bodyUsername = (req.body.username).toLowerCase();
   // Check database for username
   userModel.findOne({ username: bodyUsername })
-    .select('email username password')
+    .select('email username firstname lastname password')
     .exec(function(err, user) {
     if (err) throw err;
     if (!user) {
@@ -67,7 +67,14 @@ router.post('/authenticate', function(req, res, next) {
       } else {
         res.json({
           success: true,
-          msg: 'User authenicated great..'
+          msg: 'User authenicated great..',
+          user: {
+            id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            username: user.username,
+            email: user.email
+          }
         });
       }
     }
