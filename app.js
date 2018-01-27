@@ -25,7 +25,7 @@ app.use('/user-api', users); // Backend connection
 // app.use('/', index);
 
 app.get('*', function (req, res, next) {
-  res.sendFile('public/bapp/src/app.component.html', { root: __dirname });
+  res.sendFile('public/src/app.component.html', { root: __dirname });
 });
 
 // catch 404 and forward to error handler
